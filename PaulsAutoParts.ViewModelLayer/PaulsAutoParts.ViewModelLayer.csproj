@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PaulsAutoParts.Common.Library\PaulsAutoParts.Common.Library.csproj" />
+    <ProjectReference Include="..\PaulsAutoParts.DataLayer\PaulsAutoParts.DataLayer.csproj" />
+    <ProjectReference Include="..\PaulsAutoParts.EntityLayer\PaulsAutoParts.EntityLayer.csproj" />
+  </ItemGroup>
+
+</Project>

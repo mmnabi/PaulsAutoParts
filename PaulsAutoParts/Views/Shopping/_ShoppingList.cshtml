@@ -1,0 +1,63 @@
+@using PaulsAutoParts.EntityLayer
+
+@if (Model.DataCollection != null && Model.DataCollection.Count > 0) {
+  <div class="row mt-2">
+    <div class="col">
+      Total Parts Found: @Model.TotalRecords
+    </div>
+  </div>
+
+  <div class="row">
+    @foreach (Product item in Model.DataCollection) {
+      <div class="col-4">
+        <div class="card mt-4">
+          <div class="card-header bg-primary text-light">
+            <h5 class="card-title">@item.ProductNameShort</h5>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <div class="row">
+                  <div class="col"><div style="min-height: 3em;"><strong>@item.ProductName</strong></div></div>
+                </div>
+                <div class="row">
+                  <div class="col">Category</div>
+                  <div class="col">@item.Category</div>
+                </div>
+                <div class="row">
+                  <div class="col">Price</div>
+                  <div class="col">@item.Price.ToString("c")</div>
+                </div>
+                <div class="row">
+                  <div class="col">Fits Vehicle Years</div>
+                  <div class="col"><span>@item.YearBegin</span> to <span>@item.YearEnd</span></div>
+                </div>
+                <div class="row">
+                  <div class="col">Product ID</div>
+                  <div class="col">@item.ProductId</div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <img src="~/images/auto-parts.jpg" />
+              </div>
+            </div>
+          </div>
+          <div class="card-footer bg-primary text-light">
+            @if (item.IsInCart) {
+              <a class="btn btn-danger" asp-action="Remove" asp-route-id="@item.ProductId">
+                Remove From Cart
+              </a>
+            }
+            else {
+              <a class="btn btn-info" asp-action="Add" asp-route-id="@item.ProductId">
+                Add to Cart
+              </a>
+            }
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+}

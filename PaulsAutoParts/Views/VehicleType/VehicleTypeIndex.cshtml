@@ -1,0 +1,18 @@
+@{
+  ViewData["Title"] = "Vehicle Type Maintenance";
+}
+
+<h2>Vehicle Type Maintenance</h2>
+
+@if (Model.IsDetailVisible) {
+  <partial name="_VehicleTypeDetail" />
+}
+else {
+  <partial name="_VehicleTypeSearch" />
+  <partial name="_VehicleTypeList" />
+}
+
+@section Scripts
+{
+  <partial name="_ValidationScriptsPartial" />
+}

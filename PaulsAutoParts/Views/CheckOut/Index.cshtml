@@ -1,0 +1,88 @@
+﻿@using PaulsAutoParts.EntityLayer
+@model PaulsAutoParts.ViewModelLayer.CheckOutViewModel
+
+@{
+  ViewData["Title"] = "CheckOut";
+}
+
+<div class="text-center">
+  <h1 class="display-4">Enter Payment Information</h1>
+</div>
+
+<div class="row">
+  <div class="col">
+    <p>Total To Pay: <strong>@Model.Cart.TotalCart.ToString("c")</strong></p>
+  </div>
+</div>
+
+<form method="post" asp-action="ProcessCreditCard">
+  <div class="row">
+    <div class="col">
+      <div asp-validation-summary="All" class="text-danger">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-6">
+      <label asp-for="CustomerCreditCard.CardType"></label>
+      <select class="form-control"
+              asp-for="CustomerCreditCard.CardType"
+              asp-items="@(new SelectList(Model.CardTypes))">
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label asp-for="CustomerCreditCard.NameOnCard"></label>
+    <input asp-for="CustomerCreditCard.NameOnCard" class="form-control" />
+    <span asp-validation-for="CustomerCreditCard.NameOnCard" class="text-danger" />
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-8">
+      <label asp-for="CustomerCreditCard.CardNumber"></label>
+      <input asp-for="CustomerCreditCard.CardNumber" class="form-control" />
+      <span asp-validation-for="CustomerCreditCard.CardNumber" class="text-danger" />
+    </div>
+    <div class="form-group col-sm-4">
+      <label asp-for="CustomerCreditCard.SecurityCode"></label>
+      <input asp-for="CustomerCreditCard.SecurityCode" class="form-control" />
+      <span asp-validation-for="CustomerCreditCard.SecurityCode" class="text-danger" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-8">
+      <label asp-for="CustomerCreditCard.ExpMonth"></label>
+      <select class="form-control"
+              asp-for="CustomerCreditCard.ExpMonth"
+              asp-items="@(new SelectList(Model.Months, "MonthNumber", "MonthNameForDisplay"))">
+      </select>
+    </div>
+    <div class="form-group col-sm-4">
+      <label asp-for="CustomerCreditCard.ExpYear"></label>
+      <select class="form-control"
+              asp-for="CustomerCreditCard.ExpYear"
+              asp-items="@(new SelectList(Model.Years))">
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-4">
+      <label asp-for="CustomerCreditCard.BillingPostalCode"></label>
+      <input asp-for="CustomerCreditCard.BillingPostalCode" class="form-control" />
+      <span asp-validation-for="CustomerCreditCard.BillingPostalCode" class="text-danger" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-primary">Submit Payment</button>
+    <a class="btn btn-secondary" formnovalidate="formnovalidate" asp-action="Index" asp-controller="ShoppingCart">
+      Cancel
+    </a>
+  </div>
+</form>
+
+<div class="row">
+  <div class="col text-center">
+    <span><strong>@Model.Message</strong></span>
+  </div>
+</div>

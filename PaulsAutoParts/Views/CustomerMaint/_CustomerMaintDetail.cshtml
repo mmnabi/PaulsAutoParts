@@ -1,0 +1,40 @@
+@model PaulsAutoParts.ViewModelLayer.CustomerViewModel
+
+<form method="post" asp-action="CustomerMaintIndex">
+  <input type="hidden" asp-for="SelectedEntity.CustomerId" />
+
+  <div class="row">
+    <div class="col">
+      <div asp-validation-summary="All" class="text-danger">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label asp-for="SelectedEntity.FirstName" class="control-label"></label>
+    <input asp-for="SelectedEntity.FirstName" class="form-control" />
+    <span asp-validation-for="SelectedEntity.FirstName" class="text-danger" />
+  </div>
+  <div class="form-group">
+    <label asp-for="SelectedEntity.LastName" class="control-label"></label>
+    <input asp-for="SelectedEntity.LastName" class="form-control" />
+    <span asp-validation-for="SelectedEntity.LastName" class="text-danger" />
+  </div>
+  <div class="form-group">
+    <label asp-for="SelectedEntity.EmailAddress" class="control-label"></label>
+    <input asp-for="SelectedEntity.EmailAddress" class="form-control" />
+    <span asp-validation-for="SelectedEntity.EmailAddress" class="text-danger" />
+  </div>
+  <div class="form-group">
+    <label asp-for="SelectedEntity.Phone" class="control-label"></label>
+    <input asp-for="SelectedEntity.Phone" class="form-control" />
+    <span asp-validation-for="SelectedEntity.Phone" class="text-danger" />
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-primary">Save</button>
+    <a class="btn btn-secondary" formnovalidate="formnovalidate" asp-action="CustomerMaintIndex">
+      Cancel
+    </a>
+  </div>
+</form>

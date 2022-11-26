@@ -1,0 +1,40 @@
+@model PaulsAutoParts.ViewModelLayer.PromoCodeViewModel
+
+<form method="post" asp-action="PromoCodeIndex">
+  <input type="hidden" asp-for="SelectedEntity.PromoCodeId" />
+
+  <div class="row">
+    <div class="col">
+      <div asp-validation-summary="All" class="text-danger">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label asp-for="SelectedEntity.PromotionalCode" class="control-label"></label>
+    <input asp-for="SelectedEntity.PromotionalCode" class="form-control" />
+    <span asp-validation-for="SelectedEntity.PromotionalCode" class="text-danger" />
+  </div>
+  <div class="form-group">
+    <label asp-for="SelectedEntity.DiscountPercent" class="control-label"></label>
+    <input asp-for="SelectedEntity.DiscountPercent" class="form-control" />
+    <span asp-validation-for="SelectedEntity.DiscountPercent" class="text-danger" />
+  </div>
+  <div class="form-group">
+    <label asp-for="SelectedEntity.StartDate" class="control-label"></label>
+    <input asp-for="SelectedEntity.StartDate" class="form-control" />
+    <span asp-validation-for="SelectedEntity.StartDate" class="text-danger" />
+  </div>
+  <div class="form-group">
+    <label asp-for="SelectedEntity.EndDate" class="control-label"></label>
+    <input asp-for="SelectedEntity.EndDate" class="form-control" />
+    <span asp-validation-for="SelectedEntity.EndDate" class="text-danger" />
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-primary">Save</button>
+    <a class="btn btn-secondary" formnovalidate="formnovalidate" asp-action="PromoCodeIndex">
+      Cancel
+    </a>
+  </div>
+</form>

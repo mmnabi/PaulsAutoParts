@@ -1,0 +1,35 @@
+@model PaulsAutoParts.ViewModelLayer.VehicleTypeViewModel
+
+<form method="post" asp-action="VehicleTypeIndex">
+  <input type="hidden" asp-for="SelectedEntity.VehicleTypeId" />
+
+  <div class="row">
+    <div class="col">
+      <div asp-validation-summary="All" class="text-danger">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label asp-for="SelectedEntity.Year" class="control-label"></label>
+    <input asp-for="SelectedEntity.Year" class="form-control" />
+    <span asp-validation-for="SelectedEntity.Year" class="text-danger" />
+  </div>
+  <div class="form-group">
+    <label asp-for="SelectedEntity.Make" class="control-label"></label>
+    <input asp-for="SelectedEntity.Make" class="form-control" />
+    <span asp-validation-for="SelectedEntity.Make" class="text-danger" />
+  </div>
+  <div class="form-group">
+    <label asp-for="SelectedEntity.Model" class="control-label"></label>
+    <input asp-for="SelectedEntity.Model" class="form-control" />
+    <span asp-validation-for="SelectedEntity.Model" class="text-danger" />
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-primary">Save</button>
+    <a class="btn btn-secondary" formnovalidate="formnovalidate" asp-action="VehicleTypeIndex">
+      Cancel
+    </a>
+  </div>
+</form>

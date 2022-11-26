@@ -1,0 +1,45 @@
+@model PaulsAutoParts.ViewModelLayer.ProductViewModel
+
+<form method="post" asp-action="ProductIndex">
+  <input type="hidden" asp-for="SelectedEntity.ProductId" />
+
+  <div class="row">
+    <div class="col">
+      <div asp-validation-summary="All" class="text-danger">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label asp-for="SelectedEntity.ProductName" class="control-label"></label>
+    <input asp-for="SelectedEntity.ProductName" class="form-control" />
+    <span asp-validation-for="SelectedEntity.ProductName" class="text-danger" />
+  </div>
+  <div class="form-group">
+    <label asp-for="SelectedEntity.Category" class="control-label"></label>
+    <input asp-for="SelectedEntity.Category" class="form-control" />
+    <span asp-validation-for="SelectedEntity.Category" class="text-danger" />
+  </div>
+  <div class="form-group">
+    <label asp-for="SelectedEntity.Price" class="control-label"></label>
+    <input asp-for="SelectedEntity.Price" class="form-control" />
+    <span asp-validation-for="SelectedEntity.Price" class="text-danger" />
+  </div>
+  <div class="form-group">
+    <label asp-for="SelectedEntity.YearBegin" class="control-label"></label>
+    <input asp-for="SelectedEntity.YearBegin" class="form-control" />
+    <span asp-validation-for="SelectedEntity.YearBegin" class="text-danger" />
+  </div>
+  <div class="form-group">
+    <label asp-for="SelectedEntity.YearEnd" class="control-label"></label>
+    <input asp-for="SelectedEntity.YearEnd" class="form-control" />
+    <span asp-validation-for="SelectedEntity.YearEnd" class="text-danger" />
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-primary">Save</button>
+    <a class="btn btn-secondary" formnovalidate="formnovalidate" asp-action="ProductIndex">
+      Cancel
+    </a>
+  </div>
+</form>

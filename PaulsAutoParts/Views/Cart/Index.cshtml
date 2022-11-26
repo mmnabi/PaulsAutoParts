@@ -1,0 +1,109 @@
+﻿@using PaulsAutoParts.EntityLayer
+@model PaulsAutoParts.ViewModelLayer.ShoppingViewModel
+
+@{
+  ViewData["Title"] = "Your Cart";
+}
+
+<span class="d-none" id="cartExpires">@Model.Cart.DateExpires.ToString("yyyy-MM-dd hh:mm:ss tt")</span>
+
+<div class="text-center">
+  <h1 class="display-4">Your Shopping Cart</h1>
+  @if (Model.Cart.Items != null && Model.Cart.Items.Count > 0) {
+    <p><strong>NOTE: </strong><span id="cartExpirationMsg">@Model.Cart.CartExpirationMessage</span></p>
+  }
+</div>
+
+@if (Model.Cart.Items == null || Model.Cart.Items.Count == 0) {
+  <div class="text-center">
+    <p>You Have Not Added Any Items To Your Shopping Cart</p>
+  </div>
+}
+else {
+  <table class="table table-bordered table-hover table-striped">
+    <thead>
+      <tr>
+        <th>Quantity</th>
+        <th>Product Name</th>
+        <th class="text-right">Unit Price</th>
+        <th class="text-right">Total Price</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (ShoppingCartItem item in Model.Cart.Items) {
+        <tr>
+          <td>
+            <form method="post" asp-action="UpdateQuantity">
+              <div class="row">
+                <div class="col">
+                  <input asp-for="@item.Quantity" class="form-control" />
+                  <input class="d-none" type="hidden" asp-for="@item.ProductId" />
+                </div>
+                <div class="col">
+                  <button class="btn btn-info">Update</button>
+                </div>
+              </div>
+            </form>
+          </td>
+          <td>@Html.DisplayFor(m => item.ProductName)</td>
+          <td class="text-right">@Html.DisplayFor(m => item.Price)</td>
+          <td class="text-right">@Html.DisplayFor(m => item.TotalPrice)</td>
+          <td>
+            @Html.ActionLink("Delete", "Delete",
+                new { id = item.ProductId },
+                new
+                  {
+                    onclick = "return confirm('Delete this Product from Cart?');",
+                    @class = "btn btn-danger"
+                  })
+          </td>
+        </tr>
+      }
+    </tbody>
+    <tfoot>
+      <tr>
+        <td></td>
+        <td></td>
+        <td class="text-right"><strong>Total</strong></td>
+        <td class="text-right"><strong>@Html.DisplayFor(Model => Model.Cart.TotalCart)</strong></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td class="text-right"><strong>Promotional Code</strong></td>
+        <td class="text-right">
+          <form method="post" asp-action="ApplyPromoCode">
+            <div class="form-group">
+              @if (string.IsNullOrEmpty(Model.Cart.PromotionCode.PromotionalCode)) {
+                <label asp-for="PromoCodeToApply" class="control-label"></label>
+                <input required asp-for="PromoCodeToApply" class="form-control" />
+              }
+              else {
+                <label class="control-label">Promotional Code Applied</label>
+                <input readonly asp-for="Cart.PromotionCode.PromotionalCode" class="form-control" />
+              }
+            </div>
+            @if (string.IsNullOrEmpty(Model.Cart.PromotionCode.PromotionalCode)) {
+              <div class="form-group">
+                <button class="btn btn-success">Apply Promo Code</button>
+              </div>
+            }
+          </form>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <div class="row">
+    <div class="col mr-auto text-right">
+      <a class="btn btn-primary" asp-controller="CheckOut" asp-action="Index">Check Out</a>
+    </div>
+  </div>
+}
+
+<div class="row">
+  <div class="col text-center">
+    <span><strong>@Model.Message</strong></span>
+  </div>
+</div>

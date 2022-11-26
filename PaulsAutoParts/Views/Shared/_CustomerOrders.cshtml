@@ -1,0 +1,39 @@
+@using PaulsAutoParts.EntityLayer
+@model PaulsAutoParts.ViewModelLayer.CustomerPaymentViewModel
+
+<tr>
+  <td></td>
+  <td colspan="2">
+    <p><strong>Order Date</strong>: @Model.OrderInformation.OrderDate.Value.ToShortDateString()</p>
+  </td>
+  <td colspan="2">
+    <p><strong>Promotional Code Used</strong>: @Model.OrderInformation.PromotionalCode</p>
+  </td>
+  <td></td>
+</tr>
+<tr>
+  <td></td>
+  <td colspan="4">
+    <table class="table table-bordered table-hover table-striped">
+      <thead>
+        <tr>
+          <th>Product ID</th>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Paid</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach (OrderDetail detail in Model.OrderDetails) {
+          <tr>
+            <td>@Html.DisplayFor(m => detail.ProductId)</td>
+            <td>@Html.DisplayFor(m => detail.ProductName)</td>
+            <td>@Html.DisplayFor(m => detail.Quantity)</td>
+            <td>@Html.DisplayFor(m => detail.Price)</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </td>
+  <td></td>
+</tr>

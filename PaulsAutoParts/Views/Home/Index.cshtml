@@ -1,0 +1,98 @@
+﻿@model PaulsAutoParts.ViewModelLayer.HomeViewModel
+
+@{
+  ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+  <h1 class="display-4">Welcome to Paul's Auto Parts</h1>
+  <p>What Do You Want To Do?</p>
+</div>
+
+<div class="row">
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="text-center">Shop For Auto Parts</h3>
+      </div>
+      <div class="card-footer text-center bg-primary text-light">
+        <a class="btn btn-success" asp-action="Index" asp-controller="Shopping">
+          Go Shopping
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="text-center">Manage Your Account</h3>
+      </div>
+      <div class="card-footer text-center bg-primary text-light">
+        <a class="btn btn-success" asp-action="MyAccountMenu">
+          My Account
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="text-center">Admin Maintenance</h3>
+      </div>
+      <div class="card-footer text-center bg-primary text-light">
+        <a class="btn btn-success" asp-action="MaintenanceMenu">
+          Maintenance
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-4">
+  </div>
+  <div class="col-4">
+    @if (Model.MenuToDisplay == PaulsAutoParts.ViewModelLayer.HomeViewModel.Menus.MyAccount) {
+      <div class="card">
+        <div class="card-body">
+          <div class="list-group">
+            <a asp-action="CustomerIndex"
+               asp-controller="Customer" class="list-group-item">
+              My Information
+            </a>
+            <a asp-action="CustomerPaymentIndex"
+               asp-controller="CustomerPayment" class="list-group-item">
+              My Payments
+            </a>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+  <div class="col-4">
+    @if (Model.MenuToDisplay == PaulsAutoParts.ViewModelLayer.HomeViewModel.Menus.Maintenance) {
+      <div class="card">
+        <div class="card-body">
+          <div class="list-group">
+            <a asp-action="ProductIndex"
+               asp-controller="Product" class="list-group-item">
+              Products
+            </a>
+            <a asp-action="CustomerMaintIndex"
+               asp-controller="CustomerMaint" class="list-group-item">
+              Customers and Orders
+            </a>
+            <a asp-action="PromoCodeIndex"
+               asp-controller="PromoCode" class="list-group-item">
+              Promotional Codes
+            </a>
+            <a asp-action="VehicleTypeIndex"
+               asp-controller="VehicleType" class="list-group-item">
+              Vehicle Types
+            </a>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

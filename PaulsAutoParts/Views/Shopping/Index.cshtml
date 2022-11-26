@@ -1,0 +1,88 @@
+﻿@model PaulsAutoParts.ViewModelLayer.ShoppingViewModel
+
+@{
+  ViewData["Title"] = "Shopping";
+}
+
+<div class="text-center">
+  <h1 class="display-4">Shop for Auto Parts</h1>
+</div>
+
+<div class="row">
+  <div class="col">
+    <form method="get" asp-action="ChangeYearMakeModel">
+      <div class="card">
+        <div class="card-header">
+          <a data-toggle="collapse" role="button" href="#yearMakeModel" aria-expanded="false" aria-controls="yearMakeModel">
+            Search by Year/Make/Model
+          </a>
+        </div>
+        <div id="yearMakeModel" class="@Model.SearchYearMakeModelCollapse">
+          <div class="card-body">
+            <div class="form-group">
+              <label asp-for="SearchEntity.Year"></label>
+              <select class="form-control"
+                      onchange="this.form.submit();"
+                      asp-for="SearchEntity.Year"
+                      asp-items="@(new SelectList(Model.Years))">
+              </select>
+            </div>
+            <div class="form-group">
+              <label asp-for="SearchEntity.Make"></label>
+              <select class="form-control"
+                      onchange="this.form.submit();"
+                      asp-for="SearchEntity.Make"
+                      asp-items="@(new SelectList(Model.Makes))">
+              </select>
+            </div>
+            <div class="form-group">
+              <label asp-for="SearchEntity.Model"></label>
+              <select class="form-control"
+                      asp-for="SearchEntity.Model"
+                      asp-items="@(new SelectList(Model.Models))">
+              </select>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-primary" asp-action="SearchYearMakeModel">Search</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col">
+    <form method="get" asp-action="SearchNameCategory">
+      <div class="card">
+        <div class="card-header">
+          <a data-toggle="collapse" role="button" href="#nameCategory" aria-expanded="false" aria-controls="nameCategory">
+            Search by Product Name / Category
+          </a>
+        </div>
+        <div id="nameCategory" class="@Model.SearchNameCategoryCollapse">
+          <div class="card-body">
+            <div class="form-group">
+              <label asp-for="SearchEntity.ProductName" class="control-label"></label>
+              <input asp-for="SearchEntity.ProductName" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label asp-for="SearchEntity.Category" class="control-label"></label>
+              <select class="form-control"
+                      asp-for="SearchEntity.Category"
+                      asp-items="@(new SelectList(Model.Categories))">
+              </select>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-primary">Search</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <partial name="_ShoppingList" />
+  </div>
+</div>

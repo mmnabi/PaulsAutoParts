@@ -1,0 +1,48 @@
+@using PaulsAutoParts.EntityLayer
+@model PaulsAutoParts.ViewModelLayer.ProductViewModel
+
+@if (Model.DataCollection == null || Model.DataCollection.Count == 0) {
+  <p>Enter search parameters, then click Search button</p>
+}
+else {
+  <table class="table table-bordered table-hover table-striped">
+    <thead>
+      <tr>
+        <th>Actions</th>
+        <th>Product Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Year Begin</th>
+        <th>Year End</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (Product item in Model.DataCollection) {
+        <tr>
+          <td>
+            <a asp-action="Edit"
+               asp-route-id="@item.ProductId"
+               class="btn btn-primary">
+              Edit
+            </a>
+          </td>
+          <td>@Html.DisplayFor(m => item.ProductName)</td>
+          <td>@Html.DisplayFor(m => item.Category)</td>
+          <td>@Html.DisplayFor(m => item.Price)</td>
+          <td>@Html.DisplayFor(m => item.YearBegin)</td>
+          <td>@Html.DisplayFor(m => item.YearEnd)</td>
+          <td>
+            @Html.ActionLink("Delete", "Delete",
+                new { id = item.ProductId },
+                new
+                  {
+                    onclick = "return confirm('Delete this Product?');",
+                    @class = "btn btn-danger"
+                  })
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
