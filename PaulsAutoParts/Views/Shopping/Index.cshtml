@@ -86,3 +86,21 @@
     <partial name="_ShoppingList" />
   </div>
 </div>
+
+@section Scripts {
+    <script>
+        'use strict';
+         $(document).ready(function () {
+             // Make collapsible regions
+             // mutually exclusive
+             $("#yearMakeModel")
+                 .on("shown.bs.collapse", function () {
+                 $("#nameCategory").collapse("hide");
+             });
+             $("#nameCategory")
+             .on("shown.bs.collapse", function () {
+                 $("#yearMakeModel").collapse("hide");
+             });
+        });
+    </script>
+}
