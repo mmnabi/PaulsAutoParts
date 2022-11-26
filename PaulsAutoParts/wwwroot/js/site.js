@@ -12,6 +12,13 @@ var mainController = (function () {
     // ************************************
     // Private Functions
     // ************************************
+    function disableAllClicks() {
+        $("a").css("cursor", "arrow").click(false);
+        $("input[type='button']")
+            .attr("disabled", "disabled");
+        $("button").attr("disabled", "disabled");
+    }
+
     function pleaseWait(ctl) {
         // Was a control passed in?
         if (ctl) {
@@ -22,16 +29,20 @@ var mainController = (function () {
                 $("#theWaitMessage").html(msg);
             }
         }
+
         $("#pleaseWait").removeClass("d-none");
         $("header").addClass("pleaseWaitArea");
         $("main").addClass("pleaseWaitArea");
         $("footer").addClass("pleaseWaitArea");
+
+        disableAllClicks();
     }
 
     // ************************************
     // Public Functions
     // ************************************
     return {
-        "pleaseWait": pleaseWait
+        "pleaseWait": pleaseWait,
+        "disableAllClicks": disableAllClicks
     }
 })();
