@@ -12,7 +12,16 @@ var mainController = (function () {
     // ************************************
     // Private Functions
     // ************************************
-    function pleaseWait() {
+    function pleaseWait(ctl) {
+        // Was a control passed in?
+        if (ctl) {
+            // Look for a data-waitmsg="message"
+            // on the control clicked on
+            let msg = $(ctl).data("waitmsg");
+            if (msg) {
+                $("#theWaitMessage").html(msg);
+            }
+        }
         $("#pleaseWait").removeClass("d-none");
         $("header").addClass("pleaseWaitArea");
         $("main").addClass("pleaseWaitArea");

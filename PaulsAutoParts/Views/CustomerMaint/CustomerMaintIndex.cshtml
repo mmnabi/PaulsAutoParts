@@ -1,18 +1,28 @@
 @{
-  ViewData["Title"] = "Customer Maintenance";
+    ViewData["Title"] = "Customer Maintenance";
 }
 
 <h2>Customer Maintenance</h2>
 
-@if (Model.IsDetailVisible) {
-  <partial name="_CustomerMaintDetail" />
+@if (Model.IsDetailVisible)
+{
+    <partial name="_CustomerMaintDetail" />
 }
-else {
-  <partial name="_CustomerMaintSearch" />
-  <partial name="_CustomerMaintList" />
+else
+{
+    <partial name="_CustomerMaintSearch" />
+    <partial name="_CustomerMaintList" />
 }
 
-@section Scripts
-{
-  <partial name="_ValidationScriptsPartial" />
+@section Scripts {
+    <script>
+        'use strict';
+
+        $(document).ready(function () {
+            $("form").submit(function () {
+                mainController.pleaseWait(this);
+            });
+        });
+    </script>
+    <partial name="_ValidationScriptsPartial" />
 }

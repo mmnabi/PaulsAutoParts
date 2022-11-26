@@ -1,18 +1,29 @@
 @{
-  ViewData["Title"] = "Vehicle Type Maintenance";
+    ViewData["Title"] = "Vehicle Type Maintenance";
 }
 
 <h2>Vehicle Type Maintenance</h2>
 
-@if (Model.IsDetailVisible) {
-  <partial name="_VehicleTypeDetail" />
+@if (Model.IsDetailVisible)
+{
+    <partial name="_VehicleTypeDetail" />
 }
-else {
-  <partial name="_VehicleTypeSearch" />
-  <partial name="_VehicleTypeList" />
+else
+{
+    <partial name="_VehicleTypeSearch" />
+    <partial name="_VehicleTypeList" />
 }
 
-@section Scripts
-{
-  <partial name="_ValidationScriptsPartial" />
+@section Scripts {
+
+    <script>
+        'use strict';
+
+        $(document).ready(function () {
+            $("form").submit(function () {
+                mainController.pleaseWait(this);
+            });
+        });
+    </script>
+    <partial name="_ValidationScriptsPartial" />
 }

@@ -2,20 +2,23 @@
 @model PaulsAutoParts.ViewModelLayer.CheckOutViewModel
 
 @{
-  ViewData["Title"] = "CheckOut";
+    ViewData["Title"] = "CheckOut";
 }
 
 <div class="text-center">
-  <h1 class="display-4">Enter Payment Information</h1>
+    <h1 class="display-4">Enter Payment Information</h1>
 </div>
 
 <div class="row">
-  <div class="col">
-    <p>Total To Pay: <strong>@Model.Cart.TotalCart.ToString("c")</strong></p>
-  </div>
+    <div class="col">
+        <p>Total To Pay: <strong>@Model.Cart.TotalCart.ToString("c")</strong></p>
+    </div>
 </div>
 
-<form method="post" asp-action="ProcessCreditCard">
+<form method="post" asp-action="ProcessCreditCard"
+      data-waitmsg="Please wait while processing credit card...<br />
+Please don't refresh this page or click on the back button.<br />">
+
   <div class="row">
     <div class="col">
       <div asp-validation-summary="All" class="text-danger">
@@ -82,7 +85,20 @@
 </form>
 
 <div class="row">
-  <div class="col text-center">
-    <span><strong>@Model.Message</strong></span>
-  </div>
+    <div class="col text-center">
+        <span><strong>@Model.Message</strong></span>
+    </div>
 </div>
+
+@section Scripts
+{
+    <script>
+        'use strict';
+
+        $(document).ready(function () {
+            $("form").submit(function () {
+                mainController.pleaseWait(this);
+            });
+        });
+    </script>
+}

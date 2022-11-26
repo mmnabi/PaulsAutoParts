@@ -30,7 +30,9 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="adminDropDown">
                                 <a asp-action="ProductIndex"
-                                   asp-controller="Product" class="dropdown-item" onclick="mainController.pleaseWait();">
+                                   asp-controller="Product" class="dropdown-item" 
+                                   onclick="mainController.pleaseWait(this);" 
+                                   data-waitmsg="Please wait while loading Products...">
                                     Products
                                 </a>
                                 <div class="dropdown-divider"></div>
@@ -48,7 +50,9 @@
                                 </a>
 
                                 <a asp-action="VehicleTypeIndex"
-                                   asp-controller="VehicleType" class="dropdown-item" onclick="mainController.pleaseWait();">
+                                   asp-controller="VehicleType" class="dropdown-item" 
+                                   onclick="mainController.pleaseWait(this);" 
+                                   data-waitmsg="Please wait while loading Vehicle Types...">
                                     Vehicle Types
                                 </a>
                             </div>
@@ -82,14 +86,13 @@
     </header>
     <div class="container">
         <div id="pleaseWait" class="pleaseWaitMessage d-none">
-            <h4>
+            <h2>
+                <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+            </h2>
+            <h4 class="mt-5">
                 <span id="theWaitMessage">
                     Please wait while loading...
-                </span>
-                &nbsp;
-                <i class="fas fa-cog fa-spin"
-                   style="z-index: 99">
-                </i>
+                </span>                
             </h4>
         </div>
         <main role="main" class="pb-3">

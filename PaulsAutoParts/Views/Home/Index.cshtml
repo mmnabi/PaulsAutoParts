@@ -74,7 +74,9 @@
             <div class="card-body">
                 <div class="list-group">
                     <a asp-action="ProductIndex"
-                       asp-controller="Product" class="list-group-item">
+                       asp-controller="Product" class="list-group-item"
+                       onclick="mainController.pleaseWait(this);"
+                       data-waitmsg="Please wait while loading Products...">
                         Products
                     </a>
                     <a asp-action="CustomerMaintIndex"
@@ -86,7 +88,9 @@
                         Promotional Codes
                     </a>
                     <a asp-action="VehicleTypeIndex"
-                       asp-controller="VehicleType" class="list-group-item">
+                       asp-controller="VehicleType" class="list-group-item"
+                       onclick="mainController.pleaseWait(this);"
+                       data-waitmsg="Please wait while loading Vehicle Types...">
                         Vehicle Types
                     </a>
                 </div>

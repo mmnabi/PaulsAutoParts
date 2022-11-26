@@ -1,18 +1,28 @@
 @{
-  ViewData["Title"] = "Promo Code Maintenance";
+    ViewData["Title"] = "Promo Code Maintenance";
 }
 
 <h2>Promo Code Maintenance</h2>
 
-@if (Model.IsDetailVisible) {
-  <partial name="_PromoCodeDetail" />
+@if (Model.IsDetailVisible)
+{
+    <partial name="_PromoCodeDetail" />
 }
-else {
-  <partial name="_PromoCodeSearch" />
-  <partial name="_PromoCodeList" />
+else
+{
+    <partial name="_PromoCodeSearch" />
+    <partial name="_PromoCodeList" />
 }
 
-@section Scripts
-{
-  <partial name="_ValidationScriptsPartial" />
+@section Scripts {
+    <script>
+        'use strict';
+
+        $(document).ready(function () {
+            $("form").submit(function () {
+                mainController.pleaseWait(this);
+            });
+        });
+    </script>
+    <partial name="_ValidationScriptsPartial" />
 }
