@@ -36,33 +36,5 @@ namespace PaulsAutoParts.Controllers
     {
       return View();
     }
-
-    [HttpGet]
-    public IActionResult MyAccountMenu()
-    {
-      HomeViewModel vm = new()
-      {
-        MenuToDisplay = HomeViewModel.Menus.MyAccount
-      };
-
-      // Set "Common" View Model Properties from Session
-      base.SetViewModelFromSession(vm, UserSession);
-
-      return View("Index", vm);
-    }
-
-    [HttpGet]
-    public IActionResult MaintenanceMenu()
-    {
-      HomeViewModel vm = new()
-      {
-        MenuToDisplay = HomeViewModel.Menus.Maintenance
-      };
-
-      // Set "Common" View Model Properties from Session
-      base.SetViewModelFromSession(vm, UserSession);
-
-      return View("Index", vm);
-    }
   }
 }
