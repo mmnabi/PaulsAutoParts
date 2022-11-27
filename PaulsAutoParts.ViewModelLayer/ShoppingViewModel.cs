@@ -65,9 +65,6 @@ namespace PaulsAutoParts.ViewModelLayer
 
     [Display(Name = "Promotional Code To Apply")]
     public string PromoCodeToApply { get; set; }
-
-    public string SearchYearMakeModelCollapse { get; set; }
-    public string SearchNameCategoryCollapse { get; set; }
     #endregion
 
     #region Init Method
@@ -81,9 +78,6 @@ namespace PaulsAutoParts.ViewModelLayer
       Cart = new ShoppingCart();
 
       PromoCodeToApply = string.Empty;
-
-      SearchYearMakeModelCollapse = "collapse show";
-      SearchNameCategoryCollapse = "collapse";
     }
     #endregion
 

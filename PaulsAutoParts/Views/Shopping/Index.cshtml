@@ -1,106 +1,167 @@
 ﻿@model PaulsAutoParts.ViewModelLayer.ShoppingViewModel
 
 @{
-  ViewData["Title"] = "Shopping";
+    ViewData["Title"] = "Shopping";
 }
 
 <div class="text-center">
-  <h1 class="display-4">Shop for Auto Parts</h1>
+    <h1 class="display-4">Shop for Auto Parts</h1>
 </div>
 
 <div class="row">
-  <div class="col">
-    <form method="get" asp-action="ChangeYearMakeModel">
-      <div class="card">
-        <div class="card-header">
-          <a data-toggle="collapse" role="button" href="#yearMakeModel" aria-expanded="false" aria-controls="yearMakeModel">
-            Search by Year/Make/Model
-          </a>
-        </div>
-        <div id="yearMakeModel" class="@Model.SearchYearMakeModelCollapse">
-          <div class="card-body">
-            <div class="form-group">
-              <label asp-for="SearchEntity.Year"></label>
-              <select class="form-control"
-                      onchange="this.form.submit();"
-                      asp-for="SearchEntity.Year"
-                      asp-items="@(new SelectList(Model.Years))">
-              </select>
+    <div class="col">
+        <form method="get" asp-action="ChangeYearMakeModel">
+            <div class="card">
+                <div class="card-header">
+                    <a data-toggle="collapse" role="button" href="#yearMakeModel" aria-expanded="false" aria-controls="yearMakeModel">
+                        Search by Year/Make/Model
+                    </a>
+                </div>
+                <div id="yearMakeModel" class="collapse">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label asp-for="SearchEntity.Year"></label>
+                            <select class="form-control"
+                                    onchange="this.form.submit();"
+                                    asp-for="SearchEntity.Year"
+                                    asp-items="@(new SelectList(Model.Years))">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="SearchEntity.Make"></label>
+                            <select class="form-control"
+                                    onchange="this.form.submit();"
+                                    asp-for="SearchEntity.Make"
+                                    asp-items="@(new SelectList(Model.Makes))">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="SearchEntity.Model"></label>
+                            <select class="form-control"
+                                    asp-for="SearchEntity.Model"
+                                    asp-items="@(new SelectList(Model.Models))">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary" asp-action="SearchYearMakeModel">Search</button>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-              <label asp-for="SearchEntity.Make"></label>
-              <select class="form-control"
-                      onchange="this.form.submit();"
-                      asp-for="SearchEntity.Make"
-                      asp-items="@(new SelectList(Model.Makes))">
-              </select>
+        </form>
+    </div>
+    <div class="col">
+        <form method="get" asp-action="SearchNameCategory">
+            <div class="card">
+                <div class="card-header">
+                    <a data-toggle="collapse" role="button" href="#nameCategory" aria-expanded="false" aria-controls="nameCategory">
+                        Search by Product Name / Category
+                    </a>
+                </div>
+                <div id="nameCategory" class="collapse">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label asp-for="SearchEntity.ProductName" class="control-label"></label>
+                            <input asp-for="SearchEntity.ProductName" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="SearchEntity.Category" class="control-label"></label>
+                            <select class="form-control"
+                                    asp-for="SearchEntity.Category"
+                                    asp-items="@(new SelectList(Model.Categories))">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary">Search</button>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-              <label asp-for="SearchEntity.Model"></label>
-              <select class="form-control"
-                      asp-for="SearchEntity.Model"
-                      asp-items="@(new SelectList(Model.Models))">
-              </select>
-            </div>
-          </div>
-          <div class="card-footer">
-            <button class="btn btn-primary" asp-action="SearchYearMakeModel">Search</button>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-  <div class="col">
-    <form method="get" asp-action="SearchNameCategory">
-      <div class="card">
-        <div class="card-header">
-          <a data-toggle="collapse" role="button" href="#nameCategory" aria-expanded="false" aria-controls="nameCategory">
-            Search by Product Name / Category
-          </a>
-        </div>
-        <div id="nameCategory" class="@Model.SearchNameCategoryCollapse">
-          <div class="card-body">
-            <div class="form-group">
-              <label asp-for="SearchEntity.ProductName" class="control-label"></label>
-              <input asp-for="SearchEntity.ProductName" class="form-control" />
-            </div>
-            <div class="form-group">
-              <label asp-for="SearchEntity.Category" class="control-label"></label>
-              <select class="form-control"
-                      asp-for="SearchEntity.Category"
-                      asp-items="@(new SelectList(Model.Categories))">
-              </select>
-            </div>
-          </div>
-          <div class="card-footer">
-            <button class="btn btn-primary">Search</button>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
+        </form>
+    </div>
 </div>
 
 <div class="row">
-  <div class="col">
-    <partial name="_ShoppingList" />
-  </div>
+    <div class="col">
+        <partial name="_ShoppingList" />
+    </div>
 </div>
 
 @section Scripts {
     <script>
         'use strict';
-         $(document).ready(function () {
-             // Make collapsible regions
-             // mutually exclusive
-             $("#yearMakeModel")
-                 .on("shown.bs.collapse", function () {
-                 $("#nameCategory").collapse("hide");
-             });
-             $("#nameCategory")
-             .on("shown.bs.collapse", function () {
-                 $("#yearMakeModel").collapse("hide");
-             });
+
+        let pageController = (function () {
+            // ************************************
+            // Private Variables
+            // ************************************
+            let searchYearMakeModel = null;
+            let searchNameCategory = null;
+
+            // ************************************
+            // Private Functions
+            // ************************************
+            function setSearchArea() {
+                // Make collapsible regions mutually exclusive
+                $("#yearMakeModel").on("show.bs.collapse", function () {
+                    $("#nameCategory").collapse("hide");
+                });
+                $("#nameCategory").on("show.bs.collapse", function () {
+                    $("#yearMakeModel").collapse("hide");
+                });
+
+                setYearMakeModel();
+
+                setProductNameCategory();
+            }
+
+            function setYearMakeModel() {
+                let value = "hide";
+                // Have Make or Model been loaded?
+                let searchValues =
+                    $("#SearchEntity_Make option").length +
+                    $("#SearchEntity_Model option").length;
+                // Make and Model have been loaded
+                // Thus, a year has been selected
+                if (searchValues > 0) {
+                    value = "show";
+                }
+                $("#yearMakeModel").collapse(value);
+            }
+
+            function setProductNameCategory() {
+                let value = "hide";
+
+                // Check for a value in product name
+                if ($("#SearchEntity_ProductName").val()) {
+                    value = "show";
+                }
+                else {
+                    // Has category drop-down been loaded?
+                    if ($("#SearchEntity_Category option").length > 0) {
+                        // Has a valid category been selected?
+                        if ($("#SearchEntity_Category").prop("selectedIndex") > 0) {
+                            value = "show";
+                        }
+                    }
+                }
+
+                $("#nameCategory").collapse(value);
+            }
+
+            // ************************************
+            // Public Functions
+            // ************************************
+            return {
+                "setSearchArea": setSearchArea
+            }
+        })();
+
+
+        $(document).ready(function () {
+            // Determine if search area
+            // should be collapsed or not
+            pageController.setSearchArea();
         });
     </script>
 }

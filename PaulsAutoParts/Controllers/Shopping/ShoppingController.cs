@@ -37,10 +37,6 @@ namespace PaulsAutoParts.Controllers
       vm.GetYears();
       vm.GetCategories();
 
-      // Set collapse CSS style on accordions
-      vm.SearchYearMakeModelCollapse = "collapse show";
-      vm.SearchNameCategoryCollapse = "collapse";
-
       return View(vm);
     }
     #endregion
@@ -90,10 +86,6 @@ namespace PaulsAutoParts.Controllers
       vm.GetCategories();
       vm.LoadYearsMakesModels();
 
-      // Set collapse CSS style on accordions
-      vm.SearchYearMakeModelCollapse = "collapse show";
-      vm.SearchNameCategoryCollapse = "collapse";
-
       // Store last product search
       UserSession.LastProductSearch = vm.SearchEntity;
     }
@@ -121,10 +113,6 @@ namespace PaulsAutoParts.Controllers
       // Load Drop-Downs
       vm.GetYears();
       vm.GetCategories();
-
-      // Set collapse CSS style on accordions
-      vm.SearchYearMakeModelCollapse = "collapse";
-      vm.SearchNameCategoryCollapse = "collapse show";
 
       // Store last product search
       UserSession.LastProductSearch = vm.SearchEntity;
