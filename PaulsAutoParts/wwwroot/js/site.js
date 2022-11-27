@@ -45,7 +45,9 @@ var mainController = (function () {
 
     function formSubmit() {
         $("form").submit(function () {
-            pleaseWait(this);
+            if ($("form").valid()) {
+                pleaseWait(this);
+            }
         });
     }
 
