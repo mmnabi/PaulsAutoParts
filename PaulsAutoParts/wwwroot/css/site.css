@@ -91,3 +91,7 @@ body {
     top: 7em;
     transform: translate(-50%, 0);
 }
+
+.error {
+    color: red;
+}
