@@ -20,6 +20,33 @@ else
         'use strict';
 
         let pageController = (function () {
+
+            function addValidationRules() {
+                $.validator.addMethod("yearplusone",
+                    function (value, element) {
+                        // this.optional(element): returns true
+                        // if element is blank and NOT required
+                        return this.optional(element) || value < (new Date().getFullYear() + 2);
+                    });
+
+                $("form").validate({
+                    // The properties in the rules and messages
+                    // objects are based on the name= attribute
+                    // in the HTML, not the id attribute
+                    rules: {
+                        "SelectedEntity.Year": {
+                            yearplusone: true
+                        }
+                    },
+                    messages: {
+                        "SelectedEntity.Year": {
+                            yearplusone: "Year Must Be Less Than " +
+                                (new Date().getFullYear() + 2)
+                        }
+                    }
+                });
+            }
+
             function setSearchValues() {
                 let searchValues =
                     $("#SearchEntity_Make").val() +
@@ -40,12 +67,16 @@ else
             return {
                 "setSearchValues": setSearchValues,
                 "setSearchArea": mainController.setSearchArea,
-                "isSearchFilledIn": mainController.isSearchFilledIn
+                "isSearchFilledIn": mainController.isSearchFilledIn,
+                "addValidationRules": addValidationRules
             }
         })();
 
 
         $(document).ready(function () {
+            // Add jQuery validation rules
+            pageController.addValidationRules();
+
             // Setup the form submit
             mainController.formSubmit();
 
