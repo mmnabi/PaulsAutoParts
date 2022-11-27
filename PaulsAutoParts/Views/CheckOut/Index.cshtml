@@ -91,14 +91,13 @@ Please don't refresh this page or click on the back button.<br />">
 </div>
 
 @section Scripts
-{
+    {
     <script>
         'use strict';
 
         $(document).ready(function () {
-            $("form").submit(function () {
-                mainController.pleaseWait(this);
-            });
+            // Setup the form submit
+            mainController.formSubmit();
         });
     </script>
 }

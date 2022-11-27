@@ -38,11 +38,18 @@ var mainController = (function () {
         disableAllClicks();
     }
 
+    function formSubmit() {
+        $("form").submit(function () {
+            pleaseWait(this);
+        });
+    }
+
     // ************************************
     // Public Functions
     // ************************************
     return {
         "pleaseWait": pleaseWait,
-        "disableAllClicks": disableAllClicks
+        "disableAllClicks": disableAllClicks,
+        "formSubmit": formSubmit
     }
 })();

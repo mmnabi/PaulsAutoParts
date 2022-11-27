@@ -19,9 +19,8 @@ else
         'use strict';
 
         $(document).ready(function () {
-            $("form").submit(function () {
-                mainController.pleaseWait(this);
-            });
+            // Setup the form submit
+            mainController.formSubmit();
         });
     </script>
     <partial name="_ValidationScriptsPartial" />
