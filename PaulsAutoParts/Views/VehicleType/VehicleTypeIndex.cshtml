@@ -19,9 +19,39 @@ else
     <script>
         'use strict';
 
+        let pageController = (function () {
+            function setSearchValues() {
+                let searchValues =
+                    $("#SearchEntity_Make").val() +
+                    $("#SearchEntity_Model").val();
+
+                let year = $("#SearchEntity_Year").val();
+
+                // Year may contain <-- Select a Year -->
+                // ignore that entry
+                if (year && !year.startsWith("<--")) {
+                    searchValues += year;
+                }
+
+                mainController.setSearchValues(searchValues);
+            }
+
+            // Expose public functions from closure
+            return {
+                "setSearchValues": setSearchValues,
+                "setSearchArea": mainController.setSearchArea,
+                "isSearchFilledIn": mainController.isSearchFilledIn
+            }
+        })();
+
+
         $(document).ready(function () {
             // Setup the form submit
             mainController.formSubmit();
+
+            // Collapse search area or not?
+            pageController.setSearchValues();
+            pageController.setSearchArea();
         });
     </script>
     <partial name="_ValidationScriptsPartial" />

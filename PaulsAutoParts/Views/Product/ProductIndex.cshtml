@@ -18,9 +18,31 @@ else
     <script>
         'use strict';
 
+        let pageController = (function () {
+            function setSearchValues() {
+                let searchValues =
+                    $("#SearchEntity_ProductName").val() +
+                    $("#SearchEntity_Category").val();
+
+                mainController.setSearchValues(searchValues);
+            }
+
+            // Expose public functions from closure
+            return {
+                "setSearchValues": setSearchValues,
+                "setSearchArea": mainController.setSearchArea,
+                "isSearchFilledIn": mainController.isSearchFilledIn
+            }
+        })();
+
+
         $(document).ready(function () {
             // Setup the form submit
             mainController.formSubmit();
+
+            // Collapse search area or not?
+            pageController.setSearchValues();
+            pageController.setSearchArea();
         });
     </script>
     <partial name="_ValidationScriptsPartial" />

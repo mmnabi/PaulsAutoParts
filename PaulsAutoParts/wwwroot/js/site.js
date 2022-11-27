@@ -10,6 +10,11 @@
 // ************************************
 var mainController = (function () {
     // ************************************
+    // Private Variables
+    // ************************************
+    let searchValues = null;
+
+    // ************************************
     // Private Functions
     // ************************************
     function disableAllClicks() {
@@ -44,12 +49,28 @@ var mainController = (function () {
         });
     }
 
+    function setSearchValues(value) {
+        searchValues = value;
+    }
+
+    function isSearchFilledIn() {
+        return searchValues;
+    }
+
+    function setSearchArea() {
+        $("#searchBody").collapse(isSearchFilledIn() ? "show" : "hide");
+    }
+
+
     // ************************************
     // Public Functions
     // ************************************
     return {
         "pleaseWait": pleaseWait,
         "disableAllClicks": disableAllClicks,
-        "formSubmit": formSubmit
+        "formSubmit": formSubmit,
+        "setSearchValues": setSearchValues,
+        "isSearchFilledIn": isSearchFilledIn,
+        "setSearchArea": setSearchArea
     }
 })();
