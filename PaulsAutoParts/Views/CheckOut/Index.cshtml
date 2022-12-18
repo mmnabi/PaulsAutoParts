@@ -95,9 +95,85 @@ Please don't refresh this page or click on the back button.<br />">
     <script>
         'use strict';
 
+        let pageController = (function () {
+            function isMonthYearValid(month, year) {
+                let ret = true;
+                let currentMonth = new Date().getMonth() + 1;
+
+                // Only check month, if the current year has been selected
+                if (year == new Date().getFullYear()) {
+                    ret = month >= currentMonth;
+                }
+                return ret;
+            }
+
+            function addValidationRules() {
+                $.validator.addMethod("checkexpmonth",
+                    function (value, element) {
+                        let ret = isMonthYearValid(parseInt(value),
+                            $("#CustomerCreditCard_ExpYear").val());
+
+                        return ret;
+                    });
+
+                $.validator.addMethod("checkexpyear",
+                    function (value, element) {
+                        let ret = isMonthYearValid(
+                            $("#CustomerCreditCard_ExpMonth").val(), parseInt(value));
+
+                        return ret;
+                    });
+
+                $("form").validate({
+                    rules: {
+                        "CustomerCreditCard.ExpMonth": {
+                            required: true, checkexpmonth: {
+                                depends: function (element) {
+                                    // After checking the month, always check the year too
+                                    return $("form").validate().element(
+                                        "#CustomerCreditCard_ExpYear");
+                                }
+                            }
+                        },
+                        "CustomerCreditCard.ExpYear": {
+                            required: true,
+                            checkexpyear: true
+                        }
+                    },
+                    messages: {
+                        "CustomerCreditCard.ExpMonth": {
+                            checkexpmonth: "Expiration Month/Year Must Be Greater Than or Equal to The Current Month/ Year"
+                        },
+                        "CustomerCreditCard.ExpYear": {
+                            checkexpyear: "Expiration Month/Year Must Be Greater Than or Equal to The Current Month/ Year"
+                        }
+                    },
+                    errorPlacement: function (error, element) {
+                        if (element.attr("name") == "CustomerCreditCard.ExpMonth" ||
+                            element.attr("name") == "CustomerCreditCard.ExpYear")
+                            error.insertAfter("#CustomerCreditCard_ExpMonth");
+                        else
+                            error.insertAfter(element);
+                    }
+                });
+
+            }
+
+            // Expose public functions from closure
+            return {
+                "addValidationRules": addValidationRules
+            }
+        })();
+
+
         $(document).ready(function () {
+            // Add jQuery validation rules
+            pageController.addValidationRules();
+
             // Setup the form submit
             mainController.formSubmit();
         });
+
     </script>
+    <partial name="_ValidationScriptsPartial" />
 }
